@@ -1,7 +1,8 @@
 require('dotenv').config();
-
 const JWT = require("jsonwebtoken");
-const config = require('../config/properties.json');
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('config/properties.json'));
+;
 
 const authorization = (req,res)=>{
     JWT.verify(req.headers.authorization, process.env.SECRET_KEY,(err, response) =>{

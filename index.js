@@ -3,20 +3,29 @@ const {Server} = require('socket.io');
 const http = require('http');
 const app = express();
 const cors = require('cors');
+const fs = require('fs');
 const { mongoDB } = require('./mongoDB');
 const { insert, find, remove } = require('./helper/DBUtils/mongoDB');
 const roomChatSchema = require('./models/roomChat');
 const roomUserSchema = require('./models/roomUser');
 const routes = require('./routes/index');
+const config = JSON.parse(fs.readFileSync('config/properties.json'));
 
 app.use(cors());
 app.use('/',routes);
-
+app.use(
+    cors({
+      origin: config.baseURL, // allow to server to accept request from different origin
+      methods: 'GET,POST,PUT',
+      credentials: true, // allow session cookie from browser to pass through
+    }),
+);
 const server = http.createServer(app);
 const io = new Server(server,{
     cors: {
-    origin: '*',
-    methods: ['GET','POST','PUT'],
+    origin: config.baseURL,
+    methods: 'GET,POST,PUT',
+    credentials: true, 
 }});
 
 io.on("connection", async (socket)=> {

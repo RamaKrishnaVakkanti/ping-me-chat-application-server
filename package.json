@@ -1,8 +1,9 @@
 {
-  "name": "api",
+  "name": "CrewVonvo_Server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "./index.js",
   "scripts": {
     "start": "node index.js"
   },

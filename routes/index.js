@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const authorization = require('../Controller/authorization');
-const config = require('../config/properties.json');
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('config/properties.json'));
 const chatHistory = require('../Controller/chatHistory');
 require('../authorization/passport');
 

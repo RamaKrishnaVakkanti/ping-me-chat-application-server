@@ -1,1 +1,4 @@
-# ping-me-chat-application-server
+# Ping-Me-Chat-Application-
+
+.env
+
